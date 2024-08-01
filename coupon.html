@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coupon - Dates Fitness</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const nameSection = document.getElementById("name");
+        const paySection = document.getElementById("pay");
+        const couponSection = document.getElementById("coupon");
+        let userName = "";
+
+        nameSection.style.display = "block";
+        paySection.style.display = "none";
+        couponSection.style.display = "none";
+
+        document
+          .querySelector("#name .validate-button")
+          .addEventListener("click", () => {
+            userName = document.getElementById("namein").value;
+            console.log(userName);
+
+            if (userName.trim() !== "") {
+              document.getElementById(
+                "pay-message"
+              ).innerText = `Hey there, ${userName}!`;
+              nameSection.style.display = "none";
+              paySection.style.display = "block";
+            }
+          });
+
+        document
+          .querySelector("#pay .validate-button")
+          .addEventListener("click", () => {
+            const words = [
+              "bor3y1",
+              "bor3y2",
+              "bor3y3",
+              "bor3y4",
+              "bor3y5",
+              "bor3y6",
+              "bor3y7",
+              "bor3y8",
+              "bor3y9",
+              "bor3y10",
+            ];
+            const randomWord = words[Math.floor(Math.random() * words.length)];
+
+            document.getElementById(
+              "coupon-message"
+            ).innerText = `Hey there, ${userName}!`;
+            document.getElementById("c-message").innerText = `Your coupon is `;
+            document.getElementById("c-code").innerText = randomWord;
+
+            paySection.style.display = "none";
+            couponSection.style.display = "block";
+          });
+
+        document.getElementById("copy-button").addEventListener("click", () => {
+          const couponCode = document.getElementById("c-code").innerText;
+          navigator.clipboard.writeText(couponCode).then(
+            () => {
+              alert("The coupon was copied to the clipboard!");
+            },
+            (err) => {
+              console.error("Could not copy text: ", err);
+            }
+          );
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="description.html">Description</a></li>
+          <li><a href="premium.html">Premium</a></li>
+          <li><a href="coupon.html">Coupon</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="name">
+        <h1>Write your name!</h1>
+        <input type="text" id="namein" placeholder="Please write your name." />
+        <button class="validate-button">Enter</button>
+      </section>
+      <section id="pay">
+        <p id="pay-message"></p>
+        <button class="validate-button">Pay with Credit Card</button>
+      </section>
+      <section id="coupon">
+        <h1>Coupon</h1>
+        <p id="coupon-message"></p>
+        <p id="c-message"></p>
+        <span id="c-code" class="highlight"></span>
+        <br />
+        <button id="copy-button">Copy</button>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2024 Dates Fitness. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
